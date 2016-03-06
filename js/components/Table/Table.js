@@ -1,6 +1,7 @@
 import React from "react";
 import Row  from "../Row/Row";
-import TableStore from "../../stores/TableStore"
+import TableStore from "../../stores/TableStore";
+//import * as TableActions from "../../actions/TableActions";
 
 export default class Table extends React.Component{
 	
@@ -16,11 +17,18 @@ export default class Table extends React.Component{
 			this.setState({
 				yellowSquares: TableStore.getYellowSquares(),
 			})
-			console.log(this.state.yellowSquares);
+			var [p1, p2, p3] = this.state.yellowSquares;
+			console.log([p1, p2, p3]);
+			//console.log(p1);
+			//console.log(p2);
+			//console.log(p3);
+			this.render();
 		});
 	}
 
 	createRows(){
+		//console.log("Creating Rows!!!!");
+			
 		const [pCoorX, pCoorY] = this.props.piecePos;	
 	
 		//console.log("this.props.piecePos = "+this.props.piecePos);
@@ -31,10 +39,15 @@ export default class Table extends React.Component{
 		var startWithBlack = true;
 
 		for (var i=0; i < 8; i++) {
-
-			rows.push(<Row key={i} swb={startWithBlack} y={i} 
-						pCX={pCoorX} pCY={pCoorY}/>);
-			
+			//console.log("Pushing Row" + i);
+			rows.push( <Row key={i} 
+							swb={startWithBlack}
+							ysq={this.state.yellowSquares} 
+							y={i} 
+							pCX={pCoorX} 
+							pCY={pCoorY}/>
+					);		
+			//console.log(this.state.yellowSquares);
 			startWithBlack = !startWithBlack;
 		}
 		return <tbody>{rows}</tbody>;

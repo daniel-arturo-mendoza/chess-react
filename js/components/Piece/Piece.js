@@ -1,5 +1,6 @@
 import React from "react";
 import changeColorForSquare from "../Table/Table";
+import * as TableActions from "../../actions/TableActions";
 
 //import interact from "../../DragTest"
 var ReactDOM = require('react-dom');
@@ -43,7 +44,9 @@ export default class Piece extends React.Component {
 
 		var onHoldListener = function listener (event){
 			console.log("holding piece");
-			changeColorForSquare([0,0]);
+			//changeColorForSquare([0,0]);
+			var ysCoordinates = [ [1,1], [2,2], [3,3] ];
+			TableActions.setYellowSquares(ysCoordinates);
 		};
 
 		var node = ReactDOM.findDOMNode(this);

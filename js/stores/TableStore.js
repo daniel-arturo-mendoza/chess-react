@@ -1,4 +1,5 @@
 import {EventEmitter}  from "events";
+import dispatcher from "../dispatcher/AppDispatcher";
 
 var yellowSquares = {}, yellowSquaresVisible = false;
 
@@ -27,11 +28,22 @@ class TableStore extends EventEmitter {
 	getYellowSquares(){
 		return yellowSquares;
 	}
+
+	handleActions(action){
+		switch(action.type){
+			case "YSChange": {
+				console.log("YSChange!!!");
+				this.setYellowSquares(action.yellowSquares);
+			}
+		}
+	}
 }
 
 const tableStore = new TableStore;
 
-window.tableStore = tableStore;
+dispatcher.register(tableStore.handleActions.bind(tableStore));
+
+//window.dispatcher = dispatcher;
 
 export default tableStore;
 

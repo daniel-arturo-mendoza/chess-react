@@ -64,10 +64,17 @@ export default class Cell extends React.Component{
 
 
   setColor(color){
-		if((color == "white") || (color == "black")){ 
-      return color;
+    var c = "blue";
+
+    console.log(this.props.namida);
+		if(this.props.namida){
+      c = "yellow";
+    }
+    else if((color == "white") || (color == "black")){ 
+      c = color;
   	}
-  	return "blue";
+  	console.log("creating cell [" + this.props.x + "," + this.props.y + "] color: " + c);
+    return c;
   }
 
 	setFontColor(color){
@@ -103,13 +110,16 @@ export default class Cell extends React.Component{
 
 	render(){
     return(
-			<td id = "celldrop" style = {{ 	width  : 50, 
-							height : 50,
-							color  : this.setFontColor(this.props.color),
-							backgroundColor : this.setColor(this.props.color),
-			 			}}
-			 	onClick = {() =>this.handleClick()}>
+			<td id = "celldrop" 
+          style = { {  width  : 50, 
+          		         height : 50,
+							         color  : this.setFontColor(this.props.color),
+							         backgroundColor : this.setColor(this.props.color),
+			 			      } }
+			 	  onClick = {() =>this.handleClick()}>
+
         {this.checkForPiece()}
+      
       </td>
 		);
 	}
