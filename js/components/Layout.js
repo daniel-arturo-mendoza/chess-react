@@ -24,12 +24,17 @@ export default class Layout extends React.Component {
 
   }
 
+  changeColorForSquare(point){
+    render();
+    console.log("changeColorForSquare");
+  }
+
   render() {
     return (
       <div>
         <Header changeTitle={this.changeTitle.bind(this)} 
                 title={this.state.title} />
-        <Table piecePos={[2,3]}/>
+        <Table piecePos={[3,3]}/>
       </div>
     );
   }

@@ -1,9 +1,25 @@
 import React from "react";
-
 import Row  from "../Row/Row";
+import TableStore from "../../stores/TableStore"
 
 export default class Table extends React.Component{
 	
+	constructor() {
+		super();
+		this.state = {
+			yellowSquares: TableStore.getYellowSquares(),
+		}
+	}
+
+	componentWillMount(){
+		TableStore.on("YSChange", () => {
+			this.setState({
+				yellowSquares: TableStore.getYellowSquares(),
+			})
+			console.log(this.state.yellowSquares);
+		});
+	}
+
 	createRows(){
 		const [pCoorX, pCoorY] = this.props.piecePos;	
 	

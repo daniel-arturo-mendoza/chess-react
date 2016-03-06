@@ -1,5 +1,5 @@
 import React from "react";
-import getTable from "../Table/Table";
+import changeColorForSquare from "../Table/Table";
 
 //import interact from "../../DragTest"
 var ReactDOM = require('react-dom');
@@ -14,7 +14,7 @@ export default class Piece extends React.Component {
 	componentDidMount(){
 		
 		var onStartListener = function listener (event) {
-  					//console.log("onStart");
+  					console.log("onStart");
 				};
 
 		var onMoveListener = function listener (event) {
@@ -41,6 +41,11 @@ export default class Piece extends React.Component {
 					//console.log("onEnd");
 		};
 
+		var onHoldListener = function listener (event){
+			console.log("holding piece");
+			changeColorForSquare([0,0]);
+		};
+
 		var node = ReactDOM.findDOMNode(this);
 		node.className = "draggable";
 
@@ -60,25 +65,16 @@ export default class Piece extends React.Component {
 			onend: onEndListener
 		});
 		
-		/*piece.on('hold', function (event) {
-										var interaction = event.interaction;
-
-		    							if (!interaction.interacting()) {
-		      								interaction.start( { name: 'drag' },
-		                        							   event.interactable,
-		                        							   event.currentTarget
-		                        							 );
-		    							}
-		    						}
-		    );
-		*/
+		piece.on('hold', onHoldListener);
+		
 		console.log(piece);
 	}
 
 	render(){
 		return(
-			<div id="piece" style = { { width  : 20, 
-										height : 20 } }>
+			<div id="piece" style = { { width  : 18, 
+										height : 18,
+										backgroundColor : 'gray' } }>
 				♘
 			</div>
 		);
