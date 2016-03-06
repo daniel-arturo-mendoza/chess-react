@@ -23,11 +23,11 @@ export default class Row extends React.Component{
 			for(var j=0, len = this.props.ysq.length; j < len; j++){
 				
 				var [auxX, auxY] = [i, this.props.y];	
-				console.log("Comparing " + this.props.ysq[j] + " and " + [auxX, auxY]);
-				console.log(
+				//console.log("Comparing " + this.props.ysq[j] + " and " + [auxX, auxY]);
+				/*console.log(
 					(this.props.ysq[j][0] ==  auxX) &&
 					(this.props.ysq[j][1] ==  auxY)
-					);
+					);*/
 				
 				if( (this.props.ysq[j][0] ==  auxX) &&
 					  (this.props.ysq[j][1] ==  auxY) ){

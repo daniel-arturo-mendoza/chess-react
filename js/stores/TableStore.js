@@ -1,9 +1,8 @@
 import {EventEmitter}  from "events";
 import dispatcher from "../dispatcher/AppDispatcher";
 
+var piecePosX, piecePosY;
 var yellowSquares = {}, yellowSquaresVisible = false;
-
-
 
 function setYellowSquaresVisible(isVisible){
 	yellowSquaresVisible = isVisible;
@@ -17,12 +16,34 @@ class TableStore extends EventEmitter {
 
 	constructor(){
 		super();
-		yellowSquares = [1,0];
+		piecePosX = 3;
+		piecePosY = 3;
+		yellowSquares = [];
+	}
+
+	setPiecePosition(posX, posY){
+		piecePosX = posX
+		piecePosY = posY;
+		console.log("<TableStore> " + piecePosX + "," + piecePosY );
+		this.emit("PPChange");
+	}
+
+	getPiecePositionX(){
+		return piecePosX;
+	}
+
+	getPiecePositionY(){
+		return piecePosY;
 	}
 
 	setYellowSquares(squares){
 		yellowSquares = squares;
 		this.emit("YSChange");
+	}
+
+	clearYellowSquares(){
+		yellowSquares = [];
+		this.emit("YSClear");
 	}
 
 	getYellowSquares(){
@@ -34,6 +55,18 @@ class TableStore extends EventEmitter {
 			case "YSChange": {
 				console.log("YSChange!!!");
 				this.setYellowSquares(action.yellowSquares);
+				break;
+			}
+			case "YSClear": {
+				console.log("YSClear!!!");
+				this.clearYellowSquares();
+				break;
+			}
+			case "PPChange": {
+				console.log("PPChange!!!");
+				//this.setPiecePosition(action.piecePosX, action.piecePosY);
+				this.setPiecePosition(action.posX, action.posY);
+				break;
 			}
 		}
 	}
@@ -43,7 +76,7 @@ const tableStore = new TableStore;
 
 dispatcher.register(tableStore.handleActions.bind(tableStore));
 
-//window.dispatcher = dispatcher;
+window.dispatcher = dispatcher;
 
 export default tableStore;
 

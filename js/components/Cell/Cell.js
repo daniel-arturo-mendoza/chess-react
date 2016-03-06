@@ -1,5 +1,6 @@
 import React from "react";
 import Piece from "../Piece/Piece"
+import * as TableActions from "../../actions/TableActions";
 
 var ReactDOM = require('react-dom');
 
@@ -35,6 +36,7 @@ export default class Cell extends React.Component{
 
     var onDropListener = function (event){
       console.log("onDrop");
+      TableActions.clearYellowSquares();
     };
 
     var onDropDeactivateListener = function (event){
@@ -66,14 +68,14 @@ export default class Cell extends React.Component{
   setColor(color){
     var c = "blue";
 
-    console.log(this.props.namida);
+    //console.log(this.props.namida);
 		if(this.props.namida){
       c = "yellow";
     }
     else if((color == "white") || (color == "black")){ 
       c = color;
   	}
-  	console.log("creating cell [" + this.props.x + "," + this.props.y + "] color: " + c);
+  	//console.log("creating cell [" + this.props.x + "," + this.props.y + "] color: " + c);
     return c;
   }
 

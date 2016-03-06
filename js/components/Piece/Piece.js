@@ -2,7 +2,6 @@ import React from "react";
 import changeColorForSquare from "../Table/Table";
 import * as TableActions from "../../actions/TableActions";
 
-//import interact from "../../DragTest"
 var ReactDOM = require('react-dom');
 
 export default class Piece extends React.Component {	
@@ -15,8 +14,10 @@ export default class Piece extends React.Component {
 	componentDidMount(){
 		
 		var onStartListener = function listener (event) {
-  					console.log("onStart");
-				};
+					console.log("onStart");
+					var ysCoordinates = [ [0,1], [5,2], [3,4] ];
+					TableActions.setYellowSquares(ysCoordinates);
+		};
 
 		var onMoveListener = function listener (event) {
 					//console.log("onMove");
@@ -36,7 +37,7 @@ export default class Piece extends React.Component {
 			      	// update the posiion attributes
 			      	target.setAttribute('data-x', x);
 			      	target.setAttribute('data-y', y);
-				};
+		};
 
 		var onEndListener = function listener (event) {
 					//console.log("onEnd");
@@ -45,8 +46,8 @@ export default class Piece extends React.Component {
 		var onHoldListener = function listener (event){
 			console.log("holding piece");
 			//changeColorForSquare([0,0]);
-			var ysCoordinates = [ [1,1], [2,2], [3,3] ];
-			TableActions.setYellowSquares(ysCoordinates);
+			/*var ysCoordinates = [ [0,1], [5,2], [3,4] ];
+			TableActions.setYellowSquares(ysCoordinates);*/
 		};
 
 		var node = ReactDOM.findDOMNode(this);
@@ -70,7 +71,7 @@ export default class Piece extends React.Component {
 		
 		piece.on('hold', onHoldListener);
 		
-		console.log(piece);
+		//console.log(piece);
 	}
 
 	render(){

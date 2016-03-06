@@ -34,7 +34,7 @@ export default class Layout extends React.Component {
       <div>
         <Header changeTitle={this.changeTitle.bind(this)} 
                 title={this.state.title} />
-        <Table piecePos={[3,3]}/>
+        <Table/>
       </div>
     );
   }
