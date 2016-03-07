@@ -2,7 +2,7 @@ import {EventEmitter}  from "events";
 import dispatcher from "../dispatcher/AppDispatcher";
 
 var piecePosX, piecePosY;
-var yellowSquares = {}, yellowSquaresVisible = false;
+var yellowSquares = {};
 
 
 class TableStore extends EventEmitter {
@@ -12,10 +12,14 @@ class TableStore extends EventEmitter {
 		piecePosX = 3;
 		piecePosY = 3;
 		yellowSquares = [];
+		/*
+		rbckPosX;
+		tbackPosY;
+		*/
 	}
 
 	setPiecePosition(posX, posY){
-		piecePosX = posX
+		piecePosX = posX;
 		piecePosY = posY;
 		//console.log("<TableStore> " + piecePosX + "," + piecePosY );
 		this.emit("PPChange");
@@ -28,6 +32,30 @@ class TableStore extends EventEmitter {
 	getPiecePositionY(){
 		return piecePosY;
 	}
+
+	/*
+	rollback(){
+		this.emit("Rollback");
+	}
+	*/
+
+	/*
+	updateInitialPosition(iniPosX, iniPosY){
+		rbckPosX = iniPosX;
+		rbckPosY = iniPosY;
+		this.emit("UIniPos");
+	}
+	*/
+
+	/*
+	getInitialPositionX(){
+		return rbckPosX;
+	}
+
+	getInitialPositionY(){
+		return rbckPosY;
+	}
+	*/
 
 	setYellowSquares(squares){
 		yellowSquares = squares;
@@ -61,6 +89,12 @@ class TableStore extends EventEmitter {
 				//this.setPiecePosition(action.posX, action.posY);
 				break;
 			}
+			/*
+			case "Rollback":{
+				this.setPiecePosition(action.rbckPosX, action.rbckY);
+				break;
+			}	
+			*/
 		}
 	}
 }

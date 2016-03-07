@@ -13,6 +13,18 @@ export default class Piece extends React.Component {
     	//};
 	}
 
+	componentWillMount(){
+		/*
+		TableStore.on("UIniPos", () => {
+			console.log("Entering UIniPos");
+			this.setState({
+				rbckPosX: TableStore.getInitialPositionX(),
+				rbckPosY: TableStore.getInitialPositionY()
+			})
+		});
+		*/
+	}
+
 	componentDidMount(){
 
 		//var validCoordinates = this.getValidCoordinates();
@@ -24,9 +36,11 @@ export default class Piece extends React.Component {
 					var target = event.target;
 					var ysCoordinates = TableActions.
 											updateValidCoordinates(target.getAttribute('x'), target.getAttribute('y'));
-					console.log(ysCoordinates);
+					TableActions.setYellowSquares(ysCoordinates);
 
-					TableActions.setYellowSquares(ysCoordinates);	
+					//TableActions.updateInitialPos(iniX, iniY);
+					//console.log(ysCoordinates);
+	
 		};
 
 		var onMoveListener = function listener (event) {

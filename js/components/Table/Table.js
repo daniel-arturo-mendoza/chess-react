@@ -41,6 +41,16 @@ export default class Table extends React.Component{
 			})
 			this.render();
 		});
+
+		/*
+		TableStore.on("Rollback", () => {
+			this.setState({
+				piecePosX: TableStore.getInitialPositionX(),
+				piecePosY: TableStore.getInitialPositionY()
+			})
+			this.render();
+		}
+		*/
 	}
 
 	createRows(){

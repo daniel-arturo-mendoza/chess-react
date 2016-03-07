@@ -21,6 +21,24 @@ export function clearYellowSquares(){
 	});
 }
 
+/*
+export function rollback(rbckX, rbckY){
+	dispatcher.dispatch({
+		type: "Rollback",
+	});
+}
+*/
+
+/*
+export function updateInitialPosition(iniPosX, iniPosY){
+	dispatcher.dispatch({
+		type: "UIniPos",
+		rbckPosX: iniPosX,
+		rbckPosY: iniPosY
+	});
+}
+*/
+
 export function updateValidCoordinates(xPos, yPos){
 	console.log("updateValidCoordinates for " + xPos + " , " + yPos);
 	var x = xPos;

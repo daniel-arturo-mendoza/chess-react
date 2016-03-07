@@ -1,6 +1,7 @@
 import React from "react";
 import Piece from "../Piece/Piece"
 import * as TableActions from "../../actions/TableActions";
+import TableStore from "../../stores/TableStore";
 
 var ReactDOM = require('react-dom');
 
@@ -36,9 +37,29 @@ export default class Cell extends React.Component{
 
     var onDropListener = function (event){
       console.log("onDrop");
+      
       var target = event.target;
-      console.log(target);
-      TableActions.setPiecePosition(target.getAttribute('x'),  target.getAttribute('y'));
+      var xpos = target.getAttribute('x');
+      var ypos=  target.getAttribute('y');
+
+      var ysqr = TableStore.getYellowSquares();
+
+      for (var i = 0; i < ysqr.length; i++) {
+        
+        if((ysqr[i][0] == xpos) && (ysqr[i][1] == ypos)){
+          
+          TableActions.setPiecePosition(xpos, ypos);
+          console.log("SUPERVALID POSITION!!!");
+          return;
+        }
+      }
+      
+      console.log("INVALID POSITION!!!");
+      //TableActions.rollback();
+      TableActions.setPiecePosition(xpos, ypos);
+         
+      //console.log(target);
+      //TableActions.setPiecePosition(target.getAttribute('x'),  target.getAttribute('y'));
 
     };
 
