@@ -8,15 +8,25 @@ export default class Piece extends React.Component {
 	
 	constructor(){
 		super();
+		//this.state = {
+      	//	validCoordinates : TableActions.getYellowSquares(),
+    	//};
 	}
-	
 
 	componentDidMount(){
-		
+
+		//var validCoordinates = this.getValidCoordinates();
+		//console.log(validCoordinates);			
+
 		var onStartListener = function listener (event) {
 					console.log("onStart");
-					var ysCoordinates = [ [0,1], [5,2], [3,4] ];
-					TableActions.setYellowSquares(ysCoordinates);
+
+					var target = event.target;
+					var ysCoordinates = TableActions.
+											updateValidCoordinates(target.getAttribute('x'), target.getAttribute('y'));
+					console.log(ysCoordinates);
+
+					TableActions.setYellowSquares(ysCoordinates);	
 		};
 
 		var onMoveListener = function listener (event) {
@@ -76,13 +86,17 @@ export default class Piece extends React.Component {
 
 	render(){
 		return(
-			<div id="piece" style = { { width  : 18, 
-										height : 18,
-										backgroundColor : 'gray' } }>
+			<div id="piece" 
+				 style = { { width  : 18, 
+							 height : 18,
+							 backgroundColor : 'gray' } }
+				 x= {this.props.x}
+                 y= {this.props.x}>
+
 				♘
+
 			</div>
 		);
 	}
 }
-
 

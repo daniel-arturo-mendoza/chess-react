@@ -90,10 +90,12 @@ export default class Cell extends React.Component{
 
 	checkForPiece(){
     if(this.state.hasPiece){
-      return <Piece/>;
+      return <Piece x= {this.props.x}
+                    y= {this.props.x}/>;
 		}
     if(this.props.piece){
-      return <Piece/>;  
+      return <Piece x= {this.props.x}
+                    y= {this.props.y}/>;  
     }
   }
 
