@@ -91,7 +91,7 @@ export default class Piece extends React.Component {
 							 height : 18,
 							 backgroundColor : 'gray' } }
 				 x= {this.props.x}
-                 y= {this.props.x}>
+                 y= {this.props.y}>
 
 				♘
 

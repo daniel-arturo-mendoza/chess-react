@@ -36,11 +36,16 @@ export default class Cell extends React.Component{
 
     var onDropListener = function (event){
       console.log("onDrop");
-      TableActions.clearYellowSquares();
+      var target = event.target;
+      console.log(target);
+      TableActions.setPiecePosition(target.getAttribute('x'),  target.getAttribute('y'));
+
     };
 
     var onDropDeactivateListener = function (event){
       //console.log("onDropDeactivate");
+      TableActions.clearYellowSquares(); 
+
     };
 
     var node = ReactDOM.findDOMNode(this);
@@ -91,7 +96,7 @@ export default class Cell extends React.Component{
 	checkForPiece(){
     if(this.state.hasPiece){
       return <Piece x= {this.props.x}
-                    y= {this.props.x}/>;
+                    y= {this.props.y}/>;
 		}
     if(this.props.piece){
       return <Piece x= {this.props.x}
@@ -100,16 +105,16 @@ export default class Cell extends React.Component{
   }
 
   putPiece(){
-    this.setState({hasPiece:true});  
+    //this.setState({hasPiece:true});  
   }
 
   removePiece(){
-    this.setState({hasPiece:false});
+    //this.setState({hasPiece:false});
   }
 
  	handleClick(){
- 		this.putPiece();
-    this.render();
+ 		//this.putPiece();
+    //this.render();
  	}
 
 	render(){
@@ -120,6 +125,8 @@ export default class Cell extends React.Component{
 							         color  : this.setFontColor(this.props.color),
 							         backgroundColor : this.setColor(this.props.color),
 			 			      } }
+          x= {this.props.x}
+          y= {this.props.y}
 			 	  onClick = {() =>this.handleClick()}>
 
         {this.checkForPiece()}
