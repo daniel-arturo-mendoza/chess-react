@@ -1,5 +1,6 @@
 import {EventEmitter}  from "events";
 import dispatcher from "../dispatcher/AppDispatcher";
+import Persistence from "./Persistence";
 
 var piecePosX, piecePosY;
 var rbckPosX, rbckPosY;
@@ -10,9 +11,14 @@ class TableStore extends EventEmitter {
 
 	constructor(){
 		super();
-		piecePosX = 3;
-		piecePosY = 3;
-
+		if(Persistence.get() == null){
+			piecePosX = 3;
+			piecePosY = 3;
+		} else {
+			var data = Persistence.get();
+			piecePosX = data[0];
+			piecePosY = data[1];
+		}
 		///
 		//rbckPosX = 3;
 		//rbckPosY = 3;
@@ -89,6 +95,10 @@ class TableStore extends EventEmitter {
 			}
 			case "PPChange": {
 				console.log("PPChange!!!");
+				
+				//Persist the new value
+				Persistence.set([action.piecePosX, action.piecePosY]);
+				
 				this.setPiecePosition(action.piecePosX, action.piecePosY);
 				//this.setPiecePosition(action.posX, action.posY);
 				break;
