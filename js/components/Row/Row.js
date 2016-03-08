@@ -14,10 +14,7 @@ export default class Row extends React.Component{
 		if(!this.props.swb){
 			startColor = "white";
 		}
-
 		//console.log("Start color: " + startColor);
-
-
 		for (var i=0; i < 8; i++) {
 
 			for(var j=0, len = this.props.ysq.length; j < len; j++){
@@ -34,11 +31,8 @@ export default class Row extends React.Component{
 					isYellow = true;
 				}
 			}
-
 			//console.log("is Yellow?? " + isYellow);
-
 			//console.log("pushing cells");
-
 			cells.push( <Cell 	key= {i}
 								color= {startColor} 
 								namida = {isYellow}
@@ -48,8 +42,6 @@ export default class Row extends React.Component{
 										  (this.props.y == this.props.pCY) ) ? 
 										  true : false} />
 						);
-
-			
 			if(startColor == "black"){
 				startColor = "white";
 			} else {

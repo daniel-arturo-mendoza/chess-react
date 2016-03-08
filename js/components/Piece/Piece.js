@@ -1,6 +1,7 @@
 import React from "react";
 import changeColorForSquare from "../Table/Table";
 import * as TableActions from "../../actions/TableActions";
+import TableStore from "../../stores/TableStore";
 
 var ReactDOM = require('react-dom');
 
@@ -13,39 +14,28 @@ export default class Piece extends React.Component {
     	//};
 	}
 
-	componentWillMount(){
-		/*
-		TableStore.on("UIniPos", () => {
-			console.log("Entering UIniPos");
-			this.setState({
-				rbckPosX: TableStore.getInitialPositionX(),
-				rbckPosY: TableStore.getInitialPositionY()
-			})
-		});
-		*/
-	}
-
 	componentDidMount(){
-
 		//var validCoordinates = this.getValidCoordinates();
 		//console.log(validCoordinates);			
-
 		var onStartListener = function listener (event) {
 					console.log("onStart");
 
 					var target = event.target;
 					var ysCoordinates = TableActions.
-											updateValidCoordinates(target.getAttribute('x'), target.getAttribute('y'));
+											updateValidCoordinates(
+												target.getAttribute('x'), 
+												target.getAttribute('y'));
+					//adding the yellow squares to the board
 					TableActions.setYellowSquares(ysCoordinates);
 
-					//TableActions.updateInitialPos(iniX, iniY);
+					//updating the initial piece position in case a rollback 
+					TableActions.updateInitialPosition( target.getAttribute('x'), 
+														target.getAttribute('y'));
 					//console.log(ysCoordinates);
-	
 		};
 
 		var onMoveListener = function listener (event) {
-					//console.log("onMove");
-					
+					//console.log("onMove");		
 					var target = event.target,
           			// keep the dragged position in the data-x/data-y attributes
 			        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
@@ -64,7 +54,7 @@ export default class Piece extends React.Component {
 		};
 
 		var onEndListener = function listener (event) {
-					//console.log("onEnd");
+			//console.log("onEnd");
 		};
 
 		var onHoldListener = function listener (event){
@@ -76,9 +66,7 @@ export default class Piece extends React.Component {
 
 		var node = ReactDOM.findDOMNode(this);
 		node.className = "draggable";
-
 		//node.draggable = true;
-
 		var piece = interact(node);
 		
 		piece.draggable({
@@ -94,7 +82,6 @@ export default class Piece extends React.Component {
 		});
 		
 		piece.on('hold', onHoldListener);
-		
 		//console.log(piece);
 	}
 

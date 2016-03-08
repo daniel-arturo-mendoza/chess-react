@@ -21,26 +21,26 @@ export function clearYellowSquares(){
 	});
 }
 
-/*
-export function rollback(rbckX, rbckY){
+export function rollback(rbpX, rbpY){
 	dispatcher.dispatch({
 		type: "Rollback",
+    rbckPosX: rbpX,
+    rbckPosY: rbpY
 	});
 }
-*/
 
-/*
 export function updateInitialPosition(iniPosX, iniPosY){
-	dispatcher.dispatch({
+	console.log("updateInitialPosition for [" + iniPosX + " , " + iniPosY + "]");
+  dispatcher.dispatch({
 		type: "UIniPos",
 		rbckPosX: iniPosX,
 		rbckPosY: iniPosY
 	});
 }
-*/
+
 
 export function updateValidCoordinates(xPos, yPos){
-	console.log("updateValidCoordinates for " + xPos + " , " + yPos);
+	//console.log("updateValidCoordinates for " + xPos + " , " + yPos);
 	var x = xPos;
     var y = yPos;
     var aux;

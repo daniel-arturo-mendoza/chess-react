@@ -21,18 +21,11 @@ export default class Cell extends React.Component{
     };
 
     var onDragEnterListener = function (event){
-      console.log("onDragEnter");
-      
-      /*var draggableElement = event.relatedTarget,
-      dropzoneElement = event.target;
-
-      dropzoneElement.classList.add('drop-target');
-      draggableElement.classList.add('can-drop');
-      draggableElement.textContent = 'Dragged in';*/
+      //console.log("onDragEnter");
     };
 
     var onDragLeaveListener = function (event){
-      console.log("onDragLeave");
+      //console.log("onDragLeave");
     };
 
     var onDropListener = function (event){
@@ -54,19 +47,34 @@ export default class Cell extends React.Component{
         }
       }
       
-      console.log("INVALID POSITION!!!");
-      //TableActions.rollback();
+      console.log("INVALID POSITION!!! Need to roll back to: [" 
+                              + TableStore.getInitialPositionX() 
+                              + ", " + TableStore.getInitialPositionY() +"]");
       TableActions.setPiecePosition(xpos, ypos);
-         
-      //console.log(target);
-      //TableActions.setPiecePosition(target.getAttribute('x'),  target.getAttribute('y'));
+      //TableActions.rollback(TableStore.getInitialPositionX(), TableStore.getInitialPositionY());
 
     };
 
     var onDropDeactivateListener = function (event){
-      //console.log("onDropDeactivate");
+      //console.log("onDropDeactivate");   
       TableActions.clearYellowSquares(); 
-
+      /*
+      var target = event.target;
+      var xpos = target.getAttribute('x');
+      var ypos=  target.getAttribute('y');
+      var ysqr = TableStore.getYellowSquares();
+      for (var i = 0; i < ysqr.length; i++) {
+        if((ysqr[i][0] == xpos) && (ysqr[i][1] == ypos)){   
+          TableActions.setPiecePosition(xpos, ypos);
+          console.log("SUPERVALID POSITION!!!");
+          return;
+        }
+      }
+      console.log("INVALID POSITION!!! rolling back to: [" 
+                              + TableStore.getInitialPositionX() 
+                              + ", " + TableStore.getInitialPositionY() +"]");
+      TableActions.rollback(TableStore.getInitialPositionX(), TableStore.getInitialPositionY());      
+      */
     };
 
     var node = ReactDOM.findDOMNode(this);
