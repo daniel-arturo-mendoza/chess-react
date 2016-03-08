@@ -6,7 +6,6 @@ export default class Row extends React.Component{
 	
 	createCells(){
 		//console.log("Creating Cells!!");		
-			
 		var cells = [];
 		var startColor = "black";
 		var isYellow = false;
@@ -15,27 +14,21 @@ export default class Row extends React.Component{
 			startColor = "white";
 		}
 		//console.log("Start color: " + startColor);
+		//create a row with eight cells in it
 		for (var i=0; i < 8; i++) {
-
+			//iterate through the array of points to be painted as yellow
 			for(var j=0, len = this.props.ysq.length; j < len; j++){
-				
 				var [auxX, auxY] = [i, this.props.y];	
-				//console.log("Comparing " + this.props.ysq[j] + " and " + [auxX, auxY]);
-				/*console.log(
-					(this.props.ysq[j][0] ==  auxX) &&
-					(this.props.ysq[j][1] ==  auxY)
-					);*/
-				
+				//we flag the cell to be painted with yellow if is included in the array
 				if( (this.props.ysq[j][0] ==  auxX) &&
 					  (this.props.ysq[j][1] ==  auxY) ){
 					isYellow = true;
 				}
 			}
-			//console.log("is Yellow?? " + isYellow);
 			//console.log("pushing cells");
 			cells.push( <Cell 	key= {i}
 								color= {startColor} 
-								namida = {isYellow}
+								isYw = {isYellow}
 								x= {i} 
 								y= {this.props.y}
 								piece= {( (i == this.props.pCX) && 

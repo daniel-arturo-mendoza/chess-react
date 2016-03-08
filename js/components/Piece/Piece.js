@@ -9,17 +9,16 @@ export default class Piece extends React.Component {
 	
 	constructor(){
 		super();
-		//this.state = {
-      	//	validCoordinates : TableActions.getYellowSquares(),
-    	//};
 	}
 
 	componentDidMount(){
-		//var validCoordinates = this.getValidCoordinates();
+		//Here we define the functions for the drag behavior for the piece.
+
 		//console.log(validCoordinates);			
 		var onStartListener = function listener (event) {
-					console.log("onStart");
+					//console.log("onStart");
 
+					//calculate valid positions for the piece
 					var target = event.target;
 					var ysCoordinates = TableActions.
 											updateValidCoordinates(
@@ -41,14 +40,12 @@ export default class Piece extends React.Component {
 			        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
 			        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
-			        //console.log("X: " + x + "   Y: " + y);					
-
-			      	// translate the element
+			        // translate the element
 			      	target.style.webkitTransform =
 			      	target.style.transform =
 			        'translate(' + x + 'px, ' + y + 'px)';
 
-			      	// update the posiion attributes
+			      	// update the position attributes
 			      	target.setAttribute('data-x', x);
 			      	target.setAttribute('data-y', y);
 		};
@@ -58,17 +55,15 @@ export default class Piece extends React.Component {
 		};
 
 		var onHoldListener = function listener (event){
-			console.log("holding piece");
-			//changeColorForSquare([0,0]);
-			/*var ysCoordinates = [ [0,1], [5,2], [3,4] ];
-			TableActions.setYellowSquares(ysCoordinates);*/
+			//console.log("holding piece");
 		};
 
+		//obtain the DOM for to Piece to make it draggable with interact.js
 		var node = ReactDOM.findDOMNode(this);
 		node.className = "draggable";
-		//node.draggable = true;
 		var piece = interact(node);
 		
+		//configure drag actions 
 		piece.draggable({
 			//manualStart: true,
 			intertia: true,
@@ -81,7 +76,10 @@ export default class Piece extends React.Component {
 			onend: onEndListener
 		});
 		
+		//adding a behavior on hold action
+		//it was not used in practice.
 		piece.on('hold', onHoldListener);
+		
 		//console.log(piece);
 	}
 

@@ -19,27 +19,21 @@ class TableStore extends EventEmitter {
 			piecePosX = data[0];
 			piecePosY = data[1];
 		}
-		///
-		//rbckPosX = 3;
-		//rbckPosY = 3;
-		///
-
 		yellowSquares = [];
-		
 	}
 
 	setPiecePosition(posX, posY){
 		piecePosX = posX;
 		piecePosY = posY;
-		console.log("<TableStore><setPiecePosition>" + piecePosX + "," + piecePosY );
+		//console.log("<TableStore><setPiecePosition>" + piecePosX + "," + piecePosY );
 		this.emit("PPChange");
 	}
 
 	setPiecePositionFromRollback(pX, pY){
 		piecePosX = pX;
 		piecePosY = pY;
-		console.log("<TableStore><setPiecePositionFromRollback>" + piecePosX + "," + piecePosY );
-		console.log("<TableStore><setPiecePositionFromRollback> emiting Rollback event");
+		//console.log("<TableStore><setPiecePositionFromRollback>" + piecePosX + "," + piecePosY );
+		//console.log("<TableStore><setPiecePositionFromRollback> emiting Rollback event");
 		this.emit("Rollback");
 	}
 
@@ -52,7 +46,7 @@ class TableStore extends EventEmitter {
 	}
 
 	updateInitialPosition(iniPosX, iniPosY){
-		console.log("<TableStore> Updating initial position for Rollback");
+		//console.log("<TableStore> Updating initial position for Rollback");
 		rbckPosX = iniPosX;
 		rbckPosY = iniPosY;
 		this.emit("UIniPos");
@@ -82,6 +76,8 @@ class TableStore extends EventEmitter {
 	}
 
 	handleActions(action){
+		//here we catch actions from the dispatcher and do
+		//specific operation(s)
 		switch(action.type){
 			case "YSChange": {
 				//console.log("YSChange!!!");
@@ -94,13 +90,12 @@ class TableStore extends EventEmitter {
 				break;
 			}
 			case "PPChange": {
-				console.log("PPChange!!!");
+				//console.log("PPChange!!!");
 				
 				//Persist the new value
 				Persistence.set([action.piecePosX, action.piecePosY]);
 				
 				this.setPiecePosition(action.piecePosX, action.piecePosY);
-				//this.setPiecePosition(action.posX, action.posY);
 				break;
 			}
 			case "UIniPos": {
@@ -109,9 +104,14 @@ class TableStore extends EventEmitter {
 			}
 			
 			case "Rollback": {
-				console.log("<TableStore> Rollback CASE: action.rbckPosX="+ action.rbckPosX + 
-					" action.rbckPosY=" + action.rbckPosY);
+				/*console.log("<TableStore> Rollback CASE: action.rbckPosX="
+					+ action.rbckPosX 
+					+ " action.rbckPosY=" 
+					+ action.rbckPosY);*/
 				this.setPiecePositionFromRollback(action.rbckPosX, action.rbckPosY);
+
+				//If we rolled back, this would be the position to be saved
+				Persistence.set([action.rbckPosX, action.rbckPosY]);
 				break;
 			}	
 		}

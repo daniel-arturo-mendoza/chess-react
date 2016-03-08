@@ -19,16 +19,6 @@ export default class Layout extends React.Component {
     this.setState({title});
   }
 
-  movePiece(pieceCoordX, pieceCoordY){
-    pieceCoord = [pieceCoordX, pieceCoordY];
-
-  }
-
-  changeColorForSquare(point){
-    render();
-    console.log("changeColorForSquare");
-  }
-
   render() {
     return (
       <div>
